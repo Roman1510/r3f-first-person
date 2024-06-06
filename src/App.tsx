@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Landing } from './components/landing'
-import { Stage } from './components/stage'
+import { Landing } from './components/Landing'
+import { Stage } from './components/Stage'
 
 export function App() {
   const [ready, setReady] = useState(false)
   return (
-    <div className='bg-violet-950 w-screen h-screen'>
+    <div className="canvas-wrapper">
       {!ready && <Landing setReady={setReady} />}
       {ready && <Stage />}
     </div>

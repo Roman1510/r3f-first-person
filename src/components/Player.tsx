@@ -37,7 +37,9 @@ export function Player() {
     // jumping
     const world = rapier.world.raw()
     const ray = world.castRay(
-      new RAPIER.Ray(ref.current!.translation(), { x: 0, y: -1, z: 0 })
+      new RAPIER.Ray(ref.current!.translation(), { x: 0, y: -1, z: 0 }),
+      10,
+      true
     )
     const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.75
     if (jump && grounded) ref.current!.setLinvel({ x: 0, y: 7.5, z: 0 })
@@ -47,7 +49,7 @@ export function Player() {
       ref={ref}
       colliders={false}
       mass={1}
-      type='dynamic'
+      type="dynamic"
       position={[-2, 4, 24]}
       enabledRotations={[false, false, false]}
     >

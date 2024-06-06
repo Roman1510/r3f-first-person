@@ -49,11 +49,11 @@ type GLTFResult = GLTF & {
 
 export function Room(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF(
-    'R3F-First-person-camera/the_charterhouse_great_chamber.glb',
+    '/the_charterhouse_great_chamber.glb',
     '/draco-gltf'
   ) as unknown as GLTFResult
   return (
-    <RigidBody type='fixed' colliders='trimesh'>
+    <RigidBody type="fixed" colliders="trimesh">
       <group {...props} dispose={null} position={[0, 24, 0]} scale={2.5}>
         <group
           position={[-0.43, -9.71, 1.35]}
@@ -234,4 +234,4 @@ export function Room(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('R3F-First-person-camera/the_charterhouse_great_chamber.glb')
+useGLTF.preload('/the_charterhouse_great_chamber.glb')
