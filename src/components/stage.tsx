@@ -1,4 +1,4 @@
-import { Box, KeyboardControls, PointerLockControls } from '@react-three/drei'
+import { KeyboardControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier'
 import { Suspense } from 'react'
@@ -21,7 +21,7 @@ export function Stage() {
           { name: 'jump', keys: ['Space'] },
         ]}
       >
-        <Canvas camera={{ fov: 45 }}>
+        <Canvas camera={{ fov: 35 }}>
           <Suspense fallback={<Loading />}>
             <Physics gravity={[0, -30, 0]}>
               <Player />

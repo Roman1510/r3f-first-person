@@ -46,10 +46,17 @@ export const WaterPlane: React.FC = () => {
   })
 
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 1, 0]}>
-      <planeGeometry args={[100, 100, 200, 200]} ref={planeGeometryRef} />
-      <meshPhysicalMaterial color="aqua" transparent opacity={0.5} />
-      <ambientLight intensity={0.25} />
-    </mesh>
+    <>
+      <mesh scale={1} rotation={[-Math.PI / 2, 0, 0]} position={[0, -3, 0]}>
+        <planeGeometry args={[100, 100, 150, 150]} ref={planeGeometryRef} />
+        <meshPhysicalMaterial color="grey" />
+        <ambientLight intensity={0.25} />
+      </mesh>
+      <mesh scale={1} rotation={[-Math.PI / 2, 0, 0]} position={[0, -4, 0]}>
+        <planeGeometry args={[1000, 1000]} />
+        <meshPhysicalMaterial color="grey" />
+        <ambientLight intensity={0.25} />
+      </mesh>
+    </>
   )
 }

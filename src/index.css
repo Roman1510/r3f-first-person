@@ -4,6 +4,7 @@ html {
   padding: 0;
   overflow: hidden;
   font-family: sans-serif;
+  background-color: grey;
 }
 
 .canvas-wrapper {
