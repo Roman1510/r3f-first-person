@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import * as RAPIER from '@dimforge/rapier3d-compat'
 import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { useKeyboardControls } from '@react-three/drei'
+import { PointerLockControls, useKeyboardControls } from '@react-three/drei'
 import {
   CapsuleCollider,
   RigidBody,
@@ -126,14 +126,34 @@ export function Player() {
     }
   })
 
+  useFrame((state) => {
+    // Update camera position and rotation
+    const { x, y, z } = ref.current!.translation()
+    state.camera.position.set(x, y, z)
+
+    // Update spotlight position to match camera
+    if (spotlightRef.current) {
+      const spotlight = spotlightRef.current
+      spotlight.position.copy(state.camera.position)
+
+      // Calculate spotlight target position based on camera direction
+      const targetPosition = new THREE.Vector3()
+      targetPosition.setFromMatrixPosition(state.camera.matrixWorld)
+      targetPosition.y -= 1 // Adjust height if necessary
+
+      // Set spotlight target position
+      spotlight.target.position.copy(targetPosition)
+    }
+  })
+
   return (
     <>
       <spotLight
         ref={spotlightRef}
         intensity={1}
-        distance={100}
-        angle={Math.PI / 4}
-        penumbra={0.2}
+        distance={50}
+        angle={Math.PI / 6}
+        penumbra={0.1}
         castShadow
       />
       <RigidBody
@@ -146,6 +166,7 @@ export function Player() {
       >
         <CapsuleCollider args={[0.75, 1]} />
       </RigidBody>
+      <PointerLockControls />
     </>
   )
 }

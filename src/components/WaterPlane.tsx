@@ -36,8 +36,8 @@ export const WaterPlane: React.FC = () => {
       const positions = planeGeometryRef.current.attributes.position
 
       vertData.current.forEach((vd, idx) => {
-        const z = vd.initH + Math.sin(time * 2 + vd.phase) * vd.amplitude
-        positions.setZ(idx, z)
+        const y = vd.initH + Math.cos(time * 2 + vd.phase) * vd.amplitude
+        positions.setZ(idx, y)
       })
 
       positions.needsUpdate = true
@@ -46,9 +46,9 @@ export const WaterPlane: React.FC = () => {
   })
 
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.5, 0]} receiveShadow>
-      <planeGeometry args={[100, 100, 150, 150]} ref={planeGeometryRef} />
-      <meshStandardMaterial transparent opacity={0.4} color="aqua" />
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 1, 0]}>
+      <planeGeometry args={[100, 100, 200, 200]} ref={planeGeometryRef} />
+      <meshPhysicalMaterial color="aqua" transparent opacity={0.5} />
       <ambientLight intensity={0.25} />
     </mesh>
   )

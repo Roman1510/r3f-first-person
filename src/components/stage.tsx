@@ -26,12 +26,10 @@ export function Stage() {
             <Physics gravity={[0, -30, 0]}>
               <Player />
               <Room />
-              <Box args={[1]} />
               <RigidBody type="fixed" colliders={false}>
                 <CuboidCollider position={[0, 0, 0]} args={[100, 2, 100]} />
               </RigidBody>
             </Physics>
-            <PointerLockControls />
           </Suspense>
         </Canvas>
       </KeyboardControls>
