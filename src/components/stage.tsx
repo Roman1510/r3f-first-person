@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import { Loading } from './Loading'
 import { Player } from './Player'
 import { Room } from './Room'
+import { Color, FogExp2 } from 'three'
 
 export function Stage() {
   return (
@@ -18,12 +19,18 @@ export function Stage() {
             name: 'right',
             keys: ['ArrowRight', 'd', 'D'],
           },
-          { name: 'jump', keys: ['Space'] },
+          { name: 'dash', keys: ['Space'] },
         ]}
       >
-        <Canvas camera={{ fov: 35 }}>
+        <Canvas
+          camera={{ fov: 35 }}
+          onCreated={({ scene }) => {
+            scene.background = new Color(0x00010c)
+            scene.fog = new FogExp2(0xcccccc, 0.002) // Add fog with color and density
+          }}
+        >
           <Suspense fallback={<Loading />}>
-            <Physics gravity={[0, -30, 0]}>
+            <Physics gravity={[0, -1, 0]}>
               <Player />
               <Room />
               <RigidBody type="fixed" colliders={false}>
