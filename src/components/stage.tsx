@@ -21,7 +21,7 @@ export function Stage() {
           { name: 'jump', keys: ['Space'] },
         ]}
       >
-        <Canvas camera={{ fov: 50 }}>
+        <Canvas camera={{ fov: 45 }}>
           <Suspense fallback={<Loading />}>
             <Physics gravity={[0, -30, 0]}>
               <Player />
