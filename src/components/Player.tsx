@@ -56,6 +56,9 @@ export function Player() {
 
   useCameraShake(0.55, 1.4)
 
+  // Use RefObject instead of MutableRefObject
+  const spotlightRef = useRef<THREE.SpotLight>(null)
+
   useFrame((state) => {
     const { forward, backward, left, right, jump } = get()
     const velocity = ref.current!.linvel()
@@ -124,15 +127,25 @@ export function Player() {
   })
 
   return (
-    <RigidBody
-      ref={ref}
-      colliders={false}
-      mass={0.5}
-      type="dynamic"
-      position={[-2, 4, 24]}
-      enabledRotations={[false, false, false]}
-    >
-      <CapsuleCollider args={[0.75, 1]} />
-    </RigidBody>
+    <>
+      <spotLight
+        ref={spotlightRef}
+        intensity={1}
+        distance={100}
+        angle={Math.PI / 4}
+        penumbra={0.2}
+        castShadow
+      />
+      <RigidBody
+        ref={ref}
+        colliders={false}
+        mass={0.5}
+        type="dynamic"
+        position={[-2, 4, 24]}
+        enabledRotations={[false, false, false]}
+      >
+        <CapsuleCollider args={[0.75, 1]} />
+      </RigidBody>
+    </>
   )
 }

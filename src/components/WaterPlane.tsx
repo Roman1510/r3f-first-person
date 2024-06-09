@@ -20,8 +20,8 @@ export const WaterPlane: React.FC = () => {
             idx
           )
           return {
-            initH: v3.y,
-            amplitude: THREE.MathUtils.randFloatSpread(2),
+            initH: v3.z,
+            amplitude: THREE.MathUtils.randFloatSpread(1),
             phase: THREE.MathUtils.randFloat(0, Math.PI),
           }
         }
@@ -31,24 +31,25 @@ export const WaterPlane: React.FC = () => {
 
   useFrame(({ clock }) => {
     const time = clock.getElapsedTime()
-    if (planeGeometryRef.current)
-      planeGeometryRef.current.attributes.position.needsUpdate = true
 
-    vertData.current.forEach((vd, idx) => {
-      const y = vd.initH + Math.sin(time + vd.phase) * vd.amplitude
-      if (planeGeometryRef.current)
-        planeGeometryRef.current.attributes.position.setY(idx, y)
-    })
+    if (planeGeometryRef.current) {
+      const positions = planeGeometryRef.current.attributes.position
 
-    if (planeGeometryRef.current)
+      vertData.current.forEach((vd, idx) => {
+        const z = vd.initH + Math.sin(time * 2 + vd.phase) * vd.amplitude
+        positions.setZ(idx, z)
+      })
+
+      positions.needsUpdate = true
       planeGeometryRef.current.computeVertexNormals()
+    }
   })
 
   return (
-    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 1, 0]} receiveShadow>
-      <planeGeometry args={[100, 100, 350, 350]} ref={planeGeometryRef} />
-      <meshLambertMaterial opacity={0.4} color="aqua" />
-      <ambientLight />
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.5, 0]} receiveShadow>
+      <planeGeometry args={[100, 100, 150, 150]} ref={planeGeometryRef} />
+      <meshStandardMaterial transparent opacity={0.4} color="aqua" />
+      <ambientLight intensity={0.25} />
     </mesh>
   )
 }
