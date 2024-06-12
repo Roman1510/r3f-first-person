@@ -67,13 +67,13 @@ export function Player() {
         angle={Math.PI / 6}
         penumbra={0.1}
       />
-
+      <ambientLight intensity={0.05} />
       <RigidBody
         ref={ref}
         colliders={false}
         mass={0.5}
         type="dynamic"
-        position={[-2, 4, 24]}
+        position={[0, 4, 0]}
         enabledRotations={[false, false, false]}
       >
         <mesh ref={emptyMeshRef}>
