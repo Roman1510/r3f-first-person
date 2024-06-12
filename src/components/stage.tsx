@@ -23,10 +23,10 @@ export function Stage() {
         ]}
       >
         <Canvas
-          camera={{ fov: 35 }}
+          camera={{ fov: 30 }}
           onCreated={({ scene }) => {
             scene.background = new Color(0x00010c)
-            scene.fog = new FogExp2(0xcccccc, 0.002) // Add fog with color and density
+            scene.fog = new FogExp2(0x0e0e0e, 0.002) // Add fog with color and density
           }}
         >
           <Suspense fallback={<Loading />}>
@@ -34,7 +34,7 @@ export function Stage() {
               <Player />
               <Room />
               <RigidBody type="fixed" colliders={false}>
-                <CuboidCollider position={[0, 0, 0]} args={[100, 2, 100]} />
+                <CuboidCollider position={[0, 0, 0]} args={[1000, 2, 1000]} />
               </RigidBody>
             </Physics>
           </Suspense>
